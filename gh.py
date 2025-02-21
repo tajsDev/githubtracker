@@ -2,6 +2,7 @@ import requests
 import sys
 import json 
 from collections import defaultdict
+from http import HTTPStatus
 
 def get_commits(events):
     commit_dict  = defaultdict(int)
@@ -38,6 +39,8 @@ def main():
             events = response.json()
             get_commits(events)
             get_issues(events)
+        else:
+            print(HTTPStatus(response.status_code).phrase)
     else:
         print("Error 1: Please provide a username.")
 
